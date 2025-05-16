@@ -25,3 +25,7 @@ Saat menjalankan perintah cargo run pada program publisher, aplikasi akan mengir
 #### Monitoring chart based 
 ![Screenshot Monitoring chart](/images/4_RabbitMQ_run.png)
 Spike pada grafik RabbitMQ terjadi karena setiap kali program publisher dijalankan, ia langsung mengirim lima pesan secara berurutan ke broker dalam waktu yang sangat singkat. Hal ini menyebabkan laju pengiriman pesan (publish rate) melonjak tajam dalam sekejap.
+
+#### Simulation slow subscriber
+![Simulation slow subscriber](/images/5_RabbitMQ_slow.png)
+Lonjakan ini terjadi karena program publisher dijalankan sebanyak 4 kali dalam waktu yang berdekatan, dan setiap eksekusi publisher langsung mengirim 5 pesan secara beruntun ke RabbitMQ. Artinya, terdapat total 20 pesan yang masuk ke queue dalam waktu singkat. Karena subscriber memiliki delay pemrosesan sebesar 10 ms per pesan, maka tidak semua pesan dapat langsung diproses. Akibatnya, sebagian pesan menumpuk di dalam antrean. Setelah subscriber mulai memproses pesan satu per satu, laju consume naik hingga akhirnya antrean habis dan grafik kembali menurun.
