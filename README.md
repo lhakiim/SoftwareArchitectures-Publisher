@@ -13,3 +13,7 @@ guest:guest → username dan password default RabbitMQ.
 localhost → berarti broker RabbitMQ dijalankan di komputer lokal.
 5672 → port default untuk protokol AMQP
 Publisher mengirim pesan ke broker, dan subscriber menerima pesan dari broker yang sama
+
+#### Screenshot RabbitMQ
+![Screenshot tampilan RabbitMQ](/images/1_running_RabbitMQ.png)
+
