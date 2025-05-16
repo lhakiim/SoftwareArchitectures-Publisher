@@ -22,3 +22,6 @@ Publisher mengirim pesan ke broker, dan subscriber menerima pesan dari broker ya
 ![CargoRunPublisher](/images/3_cargorun_publisher.png)
 Saat menjalankan perintah cargo run pada program publisher, aplikasi akan mengirim lima buah event bertipe UserCreatedEventMessage ke message broker RabbitMQ. Setiap event memuat data berupa user_id dan user_name, lalu dikirim ke queue bernama user_created yang telah dikonfigurasi di server RabbitMQ. Sementara itu, program subscriber yang sudah aktif akan mendengarkan queue yang sama, yaitu user_created. Ketika event diterima, subscriber akan memproses setiap pesan tersebut menggunakan UserCreatedHandler. Setelah diproses, informasi akan ditampilkan di konsol.
 
+#### Monitoring chart based 
+![Screenshot Monitoring chart](/images/4_RabbitMQ_run.png)
+Spike pada grafik RabbitMQ terjadi karena setiap kali program publisher dijalankan, ia langsung mengirim lima pesan secara berurutan ke broker dalam waktu yang sangat singkat. Hal ini menyebabkan laju pengiriman pesan (publish rate) melonjak tajam dalam sekejap.
