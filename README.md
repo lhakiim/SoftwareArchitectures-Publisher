@@ -29,3 +29,9 @@ Spike pada grafik RabbitMQ terjadi karena setiap kali program publisher dijalank
 #### Simulation slow subscriber
 ![Simulation slow subscriber](/images/5_RabbitMQ_slow.png)
 Lonjakan ini terjadi karena program publisher dijalankan sebanyak 4 kali dalam waktu yang berdekatan, dan setiap eksekusi publisher langsung mengirim 5 pesan secara beruntun ke RabbitMQ. Artinya, terdapat total 20 pesan yang masuk ke queue dalam waktu singkat. Karena subscriber memiliki delay pemrosesan sebesar 10 ms per pesan, maka tidak semua pesan dapat langsung diproses. Akibatnya, sebagian pesan menumpuk di dalam antrean. Setelah subscriber mulai memproses pesan satu per satu, laju consume naik hingga akhirnya antrean habis dan grafik kembali menurun.
+
+#### Running at least three subscribers
+
+![ManySubscribers1](/images/6_RabbitMQ_manysubs.png)
+![ManySubscribers2](/images/7_cargorun_manysubs.png)
+Saya menjalankan 3 subscriber secara paralel di terminal berbeda dan setiap subscriber terhubung ke queue yang sama di RabbitMQ. Ketika publisher dijalankan sebanyak 4 kali maka ia akan dilakukan pemrosesan message secara merata ke ketiga subscriber. Pembagian ini membuat pemrosesan message menjadi lebih cepat sesuai yang ditampilkan pada spike queued messages dibandingkan dengan menggunakan 1 subscriber seperti yang dilakukan sebelumnya.
